@@ -1,0 +1,34 @@
+<style>
+.w3-badge {
+	height:13px;
+	width:13px;
+	padding:0
+}
+
+.slideBackground00 {
+	background-position: center;
+	background-size: cover;
+	background-image: url('../images/title_00.jpg');
+	background-color: grey;
+	min-height: 100%;
+	display: block;
+}
+
+.slideBackground01 {
+	background-position: center;
+	background-size: cover;
+	background-image: url('../images/title_01.jpg');
+	background-color: grey;
+	min-height: 100%;
+	display: none;
+}
+
+.slideBackground02 {
+	background-position: center;
+	background-size: cover;
+	background-image: url('../images/title_02.jpg');
+	background-color: grey;
+	min-height: 100%;
+	display: none;
+}
+</style>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
+<mapper namespace="photo_board">
+	<select id="listAll" resultType="com.ceramicduck.angryduck.model.dto.PhotoBoardDTO">
+		select id, writer_id, title, datetime, timestamp
+		from concert 
+		order by id desc
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

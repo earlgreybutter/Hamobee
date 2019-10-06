@@ -1,0 +1,70 @@
+<style>
+body, h1,h2,h3,h4,h5,h6 {
+	font-family: "Montserrat", sans-serif
+}
+
+body, html {
+	height: 100%;
+	line-height: 1.8;
+}
+
+.w3-row-padding{
+	margin-bottom: 12px
+}
+
+.w3-sidebar {
+	width: 120px;
+	background: #FFF;
+}
+
+.setCenter {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.anchorNoDeco {
+	text-decoration: none;
+}
+
+#main_forMargin {
+	margin-left: 60px
+}
+
+#main_title {
+	padding-left: 64px;
+	padding-right: 64px;
+	padding-top: 4px;
+	padding-bottom: 4px;
+}
+	
+#main_content {
+	margin-left: 120px
+}
+	
+#hideWhenNotMobile{
+	padding-bottom: 0px
+}
+
+/* Place @media css file after normal css file */
+@media only screen and (max-width: 600px) {
+	#main_forMargin {
+		margin-left: 0
+	}
+
+	#main_title {
+		padding-left: 16px;
+		padding-right: 16px;
+		padding-top: 4px;
+		padding-bottom: 4px;
+	}
+	
+	#main_content {
+		margin-left: 0
+	}
+	
+	#hideWhenNotMobile{
+		padding-bottom: 36px
+	}
+}
+</style>

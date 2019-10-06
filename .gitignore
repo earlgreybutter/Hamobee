@@ -1,0 +1,29 @@
+# Directories #
+*/build/
+*/bin/
+*/target/
+
+# OS Files #
+.DS_Store
+ 
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+*.db
+
+# Eclipse #
+*/.project
+*/.metadata
+*/.classpath
+*/.settings/
+*/.loadpath
+
+bin/**
+tmp/**
+tmp/**/*
+*.tmp
+*.bak
+

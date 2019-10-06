@@ -1,0 +1,41 @@
+<style>
+#formCenter {
+	width: 400px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+input[type=text], select {
+	width: 100%;
+	padding: 12px 20px;
+	margin: 8px 0;
+	display: inline-block;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
+}
+
+input[type=submit] {
+	width: 100%;
+	background-color: #777777;
+	color: white;
+	padding: 14px 20px;
+	margin: 8px 0;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+input[type=submit]:hover {
+	background-color: #AAAAAA;
+}
+
+/* Place @media css file after normal css file */
+@media only screen and (max-width: 600px) {	
+	#formCenter {
+		width: 90%;
+		margin-left: auto;
+		margin-right: auto;
+	}
+}
+</style>
