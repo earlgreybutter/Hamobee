@@ -4,8 +4,30 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Insert title here</title>
+	<title>Hamobee</title>
 	<%@ include file="../include/header.jsp" %>
+	<script>
+	$(function(){
+		$("#btnApply").click(function(){
+			var concertId = "${map.dto.id}";
+			var param={"concertId":concertId};
+			$.ajax({
+				type: "post",
+				url: "${path}/photo_board/insertApply",
+				data : param,
+
+				error: function(){
+					alert("이미 지원되었습니다.");
+				},
+				success: function(){
+					alert("지원되었습니다.");
+				}
+			});
+			//location.reload();
+		});
+	});
+
+	</script>
 </head>
 <body class="w3-light-grey">
 	<%@ include file="../include/side_menu.jsp" %>
@@ -13,7 +35,7 @@
 		<!-- Header -->
 		<header>
 			<div class="w3-container">
-				<h1><b><i class="fab fa-sticker-mule"></i> Content Name</b></h1>
+				<h1><b><i class="fas fa-guitar"></i> Content</b></h1>
 				<div class="w3-section w3-bottombar"></div>
 			</div>
 		</header>
@@ -23,12 +45,27 @@
 			<div class="w3-container w3-margin-bottom">
 				<div class="w3-container w3-white">
 					<div class="w3-half">
-						<img src="resources/images/horse01.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity w3-padding-16">
+						<img src="${path}/resources/images/${map.dto.image}" alt="Image" style="width:100%" class="w3-padding-16">
 					</div>
 					<div class="w3-half">
 						<div style="margin-left:16px">
-							<p><b>Lorem Ipsum</b></p>
-							<p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+							<p>
+								<b class="w3-xlarge">${map.dto.title}</b>
+								<div style="text-align:right"> 작성자 : ${map.dto.name} 조회수 : ${map.dto.viewcnt}</div>
+							</p>
+							<p> 지역 : ${map.dto.region}</p>
+							<p> 공연 일자 : ${map.dto.datetime }</p>
+							<p> 모집 악기 : 
+								<c:forEach items="${map.dto.instruments}" var="item">
+									${item.name} &nbsp;
+								</c:forEach>
+							</p>
+							<p> 모집 장르 : 
+								<c:forEach items="${map.dto.tags}" var="item">
+									${item.content} &nbsp;
+								</c:forEach>
+							</p>
+							<p> 내용 : ${map.dto.content}</p>
 						</div>
 					</div>
 				</div>
@@ -38,13 +75,16 @@
 		<!-- Pagination -->
 		<div class="w3-center w3-padding-32">
 			<div class="w3-bar">
-				<a href="${path}/photoboard" class="w3-bar-item w3-button w3-black w3-hover-grey"> Back </a>
+				<c:choose>
+					<c:when test="${sessionScope.role=='performer'}">
+						<button type="button" id="btnApply" class="w3-bar-item w3-button w3-black w3-hover-grey">지원하기</button>
+						<div class="w3-bar-item w3-quarter"></div>
+					</c:when>
+				</c:choose>
+				<a href="${path}/photoboard?curPage=${map.curPage}&searchOption=${map.searchOption}&keyword=${map.keyword}" class="w3-bar-item w3-button w3-black w3-hover-grey"> Back </a>
 			</div>
 		</div>
 
-		<footer>
-			<div class="w3-black w3-center w3-padding-24">Created by <a href="" class="w3-hover-opacity">kok202</a></div>
-		</footer>
 	</div>
 </body>
 </html>

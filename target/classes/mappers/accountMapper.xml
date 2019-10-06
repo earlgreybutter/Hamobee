@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
+<mapper namespace="account">
+	<select id="get_id" resultType="int">
+		select id from account where email = #{email}
+	</select>
+	
+	<insert id="insert_account">
+		insert into account (id, email, password, role, name, age, gender, description) values 
+		(SEQ_ACCOUNT.nextval, #{email}, #{password}, #{role}, #{name}, #{age}, #{gender}, #{description})
+	</insert>
+	
+	<select id="email_double_check" resultType="String">
+		select email from account where email = #{email}
+	</select>
+	
+	<select id="instrument" resultType="int">
+		select id from instrument where name = #{inst}
+	</select>
+	<insert id="insert_account_instrument" parameterType="hashmap">
+		insert into account_instrument (id, account_id, instrument_id) values 
+		(SEQ_ACCOUNT_INSTRUMENT.nextval, #{accountId}, #{instrumentId})
+	</insert>
+	
+	<select id="tag" resultType="int">
+		select id from tag where content = #{t}
+	</select>
+	<insert id="insert_account_tag" parameterType="hashmap">
+		insert into account_tag (id, account_id, tag_id) values 
+		(SEQ_ACCOUNT_TAG.nextval, #{accountId}, #{tagId})
+	</insert>
+	
+	<select id="login_check" resultType="com.ceramicduck.angryduck.dto.AccountDTO">
+		select id,name,role from account 
+		where email=#{email} and password=#{password}
+	</select>
+	
+	<delete id="delete_account_instrument">
+		delete from account_instrument where account_id = #{accountId}
+	</delete>
+	
+	<delete id="delete_account_tag">
+		delete from account_tag where account_id = #{accountId}
+	</delete>
+	
+	 <delete id="delete_account">
+		delete from account where id = #{accountId}
+	</delete>
+	
+	<select id="get_account" resultType="com.ceramicduck.angryduck.dto.AccountDTO">
+		select * from account
+		where id = #{accountId}
+	</select>
+	
+	<select id="get_account_instrument" resultType="com.ceramicduck.angryduck.dto.InstrumentDTO">
+		select i.id, i.name from account_instrument a_i, instrument i
+		where a_i.account_id = #{accountId} and a_i.instrument_id = i.id
+	</select>
+	
+	<select id="get_account_tag" resultType="com.ceramicduck.angryduck.dto.TagDTO">
+		select t.id, t.content from account_tag a_t, tag t
+		where a_t.account_id = #{accountId} and a_t.tag_id = t.id
+	</select>
+	
+	<update id="update_account">
+		update account 
+		set password=#{password},role=#{role},name=#{name},age=#{age},gender=#{gender},description=#{description}
+		where email = #{email}
+	</update>
+	
+	<delete id="delete_community">
+		delete from community where writer_id = #{accountId}
+	</delete>
+	<delete id="delete_community_comment">
+		delete from community_comment where writer_id = #{accountId}
+	</delete>
+	<delete id="delete_concert_performer">
+		delete from concert_performer where account_id =#{accountId}
+	</delete>
+	
+	<select id="getApplicants" resultType="com.ceramicduck.angryduck.dto.AccountDTO">
+		select id,email, name, age, gender, description 
+		from account 
+		where id in(select account_id from concert_performer where concert_id = #{concertId})
+	</select>
+</mapper>
+

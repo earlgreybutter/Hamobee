@@ -24,7 +24,7 @@
 		</a>
 		<a href="${path}/board" class="w3-bar-item w3-button w3-padding-large w3-white">
 			<i class="fas fa-list-alt w3-xxlarge"></i>
-			<p>BOARD</p>
+			<p>COMMUNITY</p>
 		</a>
 		<a href="${path}/contact" class="w3-bar-item w3-button w3-padding-large w3-white">
 			<i class="fa fa-envelope w3-xxlarge"></i>
@@ -38,7 +38,7 @@
 			<a href="#" class="w3-bar-item w3-button" style="width:20% !important">HOME</a>
 			<a href="#" class="w3-bar-item w3-button" style="width:20% !important">ABOUT</a>
 			<a href="#" class="w3-bar-item w3-button" style="width:20% !important">PRODUCT</a>
-			<a href="#" class="w3-bar-item w3-button" style="width:20% !important">BOARD</a>
+			<a href="#" class="w3-bar-item w3-button" style="width:20% !important">COMMUNITY</a>
 			<a href="#" class="w3-bar-item w3-button" style="width:20% !important">CONTACT</a>
 		</div>
 	</div>

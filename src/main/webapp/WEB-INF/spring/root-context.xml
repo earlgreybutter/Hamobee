@@ -33,6 +33,20 @@
 		destroy-method="clearCache">
 		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"></constructor-arg>
 	</bean>
+	
+	<!-- 메일 발송을 위해 필요한 bean -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl"> 
+		<property name="host" value="smtp.gmail.com" /> 
+		<property name="port" value="587" /> 
+		<property name="username" value="kys4548@gmail.com" /> 
+		<property name="password" value="!!dudtlf00" /> 
+		<property name="javaMailProperties"> 
+			<props> 
+				<prop key="mail.smtp.auth">true</prop> 
+				<prop key="mail.smtp.starttls.enable">true</prop> 
+			</props> 
+		</property> 
+	</bean>
 
 </beans>
 

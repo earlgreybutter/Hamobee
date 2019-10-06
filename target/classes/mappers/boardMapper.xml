@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
+<mapper namespace="board">
+	
+	<sql id="paging_header">
+		select *
+		from (
+			select rownum as rn, A.*
+			from(
+	</sql>
+	<sql id="paging_footer">
+			) A
+		)
+		where rn between #{start} and #{end}
+	</sql>
+
+	<select id="listAll" resultType="com.ceramicduck.angryduck.dto.BoardDTO">
+		<include refid="paging_header" />
+		select rownum,c.id,title,timestamp,viewcnt,name,writer_id,
+		(select count(*) from community_comment where community_id = c.id) cnt
+		from community c, account a
+		<!-- 이 부분에 where절이 삽입됨 -->
+		<include refid="search" />
+		order by c.timestamp desc
+		<include refid="paging_footer"/>
+	</select>
+	
+	<sql id="search">
+		<choose>
+			<when test="search_option == 'all'">
+				where c.writer_id = a.id 
+				and
+				( name like '%'||#{keyword}||'%' 
+				or content like '%'||#{keyword}||'%'
+				or title like '%'||#{keyword}||'%' )
+			</when>
+			<otherwise>
+				where c.writer_id = a.id
+				and ${search_option} like '%'||#{keyword}||'%'
+			</otherwise>
+		</choose>
+	</sql>
+	
+	<select id="countArticle" resultType="int">
+		select count(*) 
+		from community c, account a
+		<include refid="search" />
+	</select>
+	
+	<insert id="insert">
+		insert into community (id,writer_id,title,content) values
+		(SEQ_COMMUNITY.nextval, #{writerId}, #{title}, #{content})
+	</insert>
+	
+	<select id="getView" resultType="com.ceramicduck.angryduck.dto.BoardDTO">
+		select c.id, name, title, content, timestamp, viewcnt
+		from community c, account a 
+		where c.writer_id = a.id and c.id = #{id}
+	</select>
+	
+	<update id="increaseViewcnt">
+		update community
+		set viewcnt=viewcnt+1
+		where id = #{id}
+	</update>
+	
+	<insert id="insertComment">
+		insert into community_comment (id,writer_id,community_id,content) values
+		(SEQ_COMMUNITY_COMMENT.nextval,#{writerId},#{communityId},#{content})
+	</insert>
+	
+	<select id="getComments" resultType="com.ceramicduck.angryduck.dto.CommentDTO">
+		select name,timestamp,content
+		from community_comment cc, account a
+		where cc.community_id = #{communityId} and cc.writer_id = a.id
+		order by timestamp desc
+	</select>
+	<select id="getNotice" resultType="com.ceramicduck.angryduck.dto.BoardDTO">
+		select c.id, title,timestamp,viewcnt,name,
+		(select count(*) from community_comment where community_id = c.id) cnt
+		from community c, account a
+		where c.id= #{id} and c.writer_id = a.id
+	</select>
+	
+	<delete id="delete_community">
+		delete from community where id = #{id}
+	</delete>
+	<delete id="delete_community_comment">
+		delete from community_comment where community_id = #{id}
+	</delete>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
