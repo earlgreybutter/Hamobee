@@ -9,7 +9,7 @@
 	<properties>
 		<java-version>1.8</java-version>
 		<!-- 2019년 1월 현재 최신 버전 5.1.4, 에러가 날 경우 호환성을 위해 버전을 내려야 함 -->
-		<org.springframework-version>5.1.3.RELEASE</org.springframework-version>
+		<org.springframework-version>5.2.3.RELEASE</org.springframework-version>
 		<org.aspectj-version>1.9.2</org.aspectj-version>
 		<org.slf4j-version>1.7.25</org.slf4j-version>
 	</properties>
